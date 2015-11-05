@@ -5,8 +5,8 @@ int treasureX, treasureY, treasureW, treasureH;
 int enemyX, enemyY, enemyW, enemyH;
 PImage bg1, bg2, enemy, fighter, hp, treasure, start1, start2, end1, end2;
 final int GAME_START = 0, GAME_RUN = 1, GAME_WIN = 2, GAME_OVER = 3;
-int gameState;
-int speed;
+final int STRAIGHT = 0, TILT = 1, DIAMOND = 2;
+int gameState,enemyState;
 
 boolean upPressed = false;   // as a triger
 boolean downPressed = false;
@@ -23,10 +23,9 @@ void setup () {
   treasure = loadImage("img/treasure.png");
   start1 = loadImage("img/start1.png");
   start2 = loadImage("img/start2.png");
-
   
-  gameState = GAME_START;  
-  
+  gameState = GAME_START; 
+  enemyState = STRAIGHT;
  
     fighterX = 590;
     fighterY = 240;
@@ -42,33 +41,30 @@ void setup () {
     enemyY = 0;
     enemyW = 60;
     enemyH = 60;
-    speed = 0;
-  
-      //treasure
-      
+    enemyY = floor(random(50,410)); 
+   
+    //treasure
     treasureX = floor(random(600));
     treasureY = floor(random(440));
-
-  
 }
 
+
 void draw() {
-  
+ 
   switch(gameState){
-//GAME START
+
+    //GAME START
     case GAME_START:
     image(start2,0,0);
-    
       if(mouseY > 365 && mouseY < 420 && mouseX > 200 && mouseX < 408){
         image(start1,0,0);
           if(mousePressed){
           gameState = GAME_RUN;
         }
       }
- 
       break;
       
-//GAME RUN
+    //GAME RUN
     case GAME_RUN:
     //background
     image(bg1,bgX,0);
@@ -76,30 +72,56 @@ void draw() {
     image(bg2,bgX-640,0);
     image(bg1,bgX-1280,0);
     bgX%=1280;
-
+    //hp
     fill(255,0,0,230);
     rect(18,10,hp1,14);    
     image(hp,5,1);
 
-    
     //enemy
     
-    for(int i=0;i<5;i++){
-    image(enemy,enemyX-i*enemyW,enemyY);
-    }
-    if(enemyY>height-enemyH){
-      enemyY=height-enemyW;
-    }
-    if(enemyY<enemyH){
-      enemyY=enemyH;
-    }
-    enemyX += 5;
-    enemyX %= 640+enemyW*4;
-    speed ++;
-    if(speed % 168  == 0){//this is bug!!!!!
-      enemyY = floor(random(50,410)); 
-    }
+    switch(enemyState){
+      case STRAIGHT:
+        for(int i=0;i<5;i++){
+          image(enemy,enemyX-i*enemyW,enemyY);
+        }
+ /*       if(enemyY>height-enemyH){
+          enemyY=height-enemyW;
+        }
+        if(enemyY<enemyH){
+          enemyY=enemyH;
+        }
+    */
+        enemyX += 5;
+        //enemyX %= 640+enemyW*4;
+      if(enemyX-enemyW*4 > width){
+        enemyState = TILT;
+      }
+      break;
+     
+      case TILT:
+        for(int j=0;j<5;j++){
+          enemyX=300;//bug!
+          enemyY=600;//bug!
+           image(enemy,enemyX-j*enemyW,enemyY-j*enemyH);    
+        }
+      if(enemyX-enemyW*4 > width){
+        enemyState = DIAMOND;
+      }
+      break;
+      
+      case DIAMOND:
+        for(int k=0;k<5;k++){
+          enemyX=300;//bug!
+          enemyY=600;//bug!
+           image(enemy,enemyX-k*enemyW,enemyY-k*enemyH); //incorrrect   
+        }
+      if(enemyX-enemyW*3 > width){
+        enemyState = STRAIGHT;
+      }
+      break;   
+          
 
+    }
 
     //fighter
     image(fighter,fighterX,fighterY);
