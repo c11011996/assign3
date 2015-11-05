@@ -77,7 +77,6 @@ void draw() {
     fill(255, 0, 0, 240);
     rect(18, 10, hp1, 14);    
     image(hp, 5, 1);
-
     //enemy
 
     switch(enemyState) {
@@ -87,17 +86,17 @@ void draw() {
        }
        enemyX += 5;
        if(enemyX-enemyW*4 > width){
-       enemyState = TILT;
+         enemyState = TILT;
        }
        break;
        
     case TILT:
       for (int j=0; j<5; j++) {
         enemyX=300;//bug!
-        enemyY=400;//bug!
-        image(enemy, enemyX-j*enemyW, enemyY-j*enemyH);
+        enemyY=0;//bug!
+        image(enemy, enemyX-j*enemyW, enemyY+j*enemyH);
       }
-      if (enemyX-enemyW*4 > width) {
+      if (enemyX-4*enemyW > width) {
         enemyState = DIAMOND;
       }
       break; 
@@ -105,7 +104,6 @@ void draw() {
     case DIAMOND:
         enemyX=400;//bug!
         enemyY=200;//bug!
-        
         image(enemy, enemyX, enemyY);
         image(enemy, enemyX-enemyW, enemyY-enemyH);
         image(enemy, enemyX-2*enemyW, enemyY-2*enemyH);
@@ -156,7 +154,9 @@ void draw() {
      hp1-=38;
      println (hp1) ;
      enemyX=0;
+     
      }
+     
      
      if(fighterX >= treasureX && fighterX <= treasureX+treasureW && fighterY >= treasureY && fighterY <= treasureY+treasureH){
      hp1 += 19;
