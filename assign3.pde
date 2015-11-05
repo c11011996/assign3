@@ -87,23 +87,22 @@ void draw() {
        enemyX += 5;
        if(enemyX-enemyW*4 > width){
          enemyState = TILT;
+         enemyX=0;
        }
        break;
        
     case TILT:
       for (int j=0; j<5; j++) {
-        enemyX=300;//bug!
-        enemyY=0;//bug!
         image(enemy, enemyX-j*enemyW, enemyY+j*enemyH);
       }
+      enemyX+=5;
       if (enemyX-4*enemyW > width) {
         enemyState = DIAMOND;
+        enemyX=0;
       }
       break; 
         
     case DIAMOND:
-        enemyX=400;//bug!
-        enemyY=200;//bug!
         image(enemy, enemyX, enemyY);
         image(enemy, enemyX-enemyW, enemyY-enemyH);
         image(enemy, enemyX-2*enemyW, enemyY-2*enemyH);
@@ -112,8 +111,10 @@ void draw() {
         image(enemy, enemyX-3*enemyW, enemyY+enemyH);
         image(enemy, enemyX-2*enemyW, enemyY+2*enemyH);
         image(enemy, enemyX-enemyW, enemyY+enemyH);
+        enemyX+=5;
       if (enemyX-enemyW*4 > width) {
         enemyState = STRAIGHT;
+        enemyX=0;
       }
       break;
     }
