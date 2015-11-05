@@ -41,7 +41,7 @@ void setup () {
   enemyY = 0;
   enemyW = 60;
   enemyH = 60;
-  enemyY = floor(random(50, 410)); 
+  enemyY = floor(random(50, 240)); 
 
   //treasure
   treasureX = floor(random(600));
@@ -88,6 +88,7 @@ void draw() {
        if(enemyX-enemyW*4 > width){
          enemyState = TILT;
          enemyX=0;
+         enemyY = floor(random(50, 200)); 
        }
        break;
        
@@ -98,7 +99,8 @@ void draw() {
       enemyX+=5;
       if (enemyX-4*enemyW > width) {
         enemyState = DIAMOND;
-        enemyX=0;
+         enemyX=0;
+         enemyY = floor(random(100, 300)); 
       }
       break; 
         
@@ -115,6 +117,7 @@ void draw() {
       if (enemyX-enemyW*4 > width) {
         enemyState = STRAIGHT;
         enemyX=0;
+        enemyY = floor(random(240, 360)); 
       }
       break;
     }
