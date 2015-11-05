@@ -72,6 +72,7 @@ void draw() {
     image(bg2,bgX-640,0);
     image(bg1,bgX-1280,0);
     bgX%=1280;
+    image(treasure,treasureX,treasureY);
     //hp
     fill(255,0,0,230);
     rect(18,10,hp1,14);    
@@ -101,7 +102,7 @@ void draw() {
       case TILT:
         for(int j=0;j<5;j++){
           enemyX=300;//bug!
-          enemyY=600;//bug!
+          enemyY=400;//bug!
            image(enemy,enemyX-j*enemyW,enemyY-j*enemyH);    
         }
       if(enemyX-enemyW*4 > width){
@@ -153,7 +154,6 @@ void draw() {
     }
     
     
-    
 /* 
 //hit detection   
     if(fighterX >= enemyX && fighterX <= enemyX+enemyW && fighterY >= enemyY && fighterY <= enemyY+enemyH){
@@ -163,7 +163,7 @@ void draw() {
 
     }
 
-    image(treasure,treasureX,treasureY);  
+  
     if(fighterX >= treasureX && fighterX <= treasureX+treasureW && fighterY >= treasureY && fighterY <= treasureY+treasureH){
       hp1 += 19;
       println(hp1);
