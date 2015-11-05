@@ -77,8 +77,8 @@ void draw() {
     fill(255, 0, 0, 240);
     rect(18, 10, hp1, 14);    
     image(hp, 5, 1);
+    
     //enemy
-
     switch(enemyState) {
        case STRAIGHT:
        for(int i=0;i<5;i++){
@@ -147,17 +147,14 @@ void draw() {
       }
     }
 
-
     /* 
      //hit detection   
      if(fighterX >= enemyX && fighterX <= enemyX+enemyW && fighterY >= enemyY && fighterY <= enemyY+enemyH){
      hp1-=38;
      println (hp1) ;
      enemyX=0;
-     
      }
-     
-     
+         
      if(fighterX >= treasureX && fighterX <= treasureX+treasureW && fighterY >= treasureY && fighterY <= treasureY+treasureH){
      hp1 += 19;
      println(hp1);
@@ -190,7 +187,6 @@ void draw() {
     break;
   }
 }
-
 
 void keyPressed() {
   if (key == CODED) { // detect special keys 
