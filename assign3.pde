@@ -86,7 +86,6 @@ void draw() {
        image(enemy,enemyX-i*enemyW,enemyY);
        }
        enemyX += 5;
-       //enemyX %= 640+enemyW*4;
        if(enemyX-enemyW*4 > width){
        enemyState = TILT;
        }
@@ -157,9 +156,7 @@ void draw() {
      hp1-=38;
      println (hp1) ;
      enemyX=0;
-     
      }
-     
      
      if(fighterX >= treasureX && fighterX <= treasureX+treasureW && fighterY >= treasureY && fighterY <= treasureY+treasureH){
      hp1 += 19;
