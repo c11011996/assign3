@@ -128,14 +128,12 @@ void draw() {
       fighterY -= 5;
       if (fighterY < 0) {
         fighterY = 0;
-        fighterX -= 5;
       }
     }
     if (downPressed) {
       fighterY += 5;
       if (fighterY > 430) {
         fighterY = 430;
-        fighterX -= 5;
       }
     }
     if (leftPressed) {
